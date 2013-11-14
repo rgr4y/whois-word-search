@@ -14,6 +14,8 @@ class Ch extends \Deft\Nic {
      */
     const URL = "http://whois.europeregistry.com/whoisengine/request/whoisinfo.php?security_code=null&domain_name=";
 
+    const REGEX = "/^[A-Za-z0-9\-]{3,}\.ch$/";
+
     /**
      * Whether this TLD uses CURL (auto-init in base class)
      */

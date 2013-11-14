@@ -29,7 +29,8 @@ abstract class Nic
             $this->curlInit();
         }
 
-        $this->wordsFile = __DIR__ . "/../../words/" . $tld;
+        $this->wordsDir  = __DIR__ . "/../../words/";
+        $this->wordsFile = $this->wordsDir . $tld;
     }
 
     public function getWords()
@@ -41,6 +42,23 @@ abstract class Nic
             if ($word === $this->tld) unset($words[$k]);
 
             $word = preg_replace("/" . $this->tld . "$/", "." . $this->tld, $word);
+
+            if (defined('static::REGEX')) {
+                if (!preg_match(static::REGEX, $word)) {
+                    echo "INVALID: " . $word."\n";
+                    unset($words[$k]);
+                }
+            }
+        }
+
+        if (file_exists($this->wordsDir."all")) {
+            $all = file_get_contents($this->wordsDir."all");
+            $all = explode("\n", $all);
+
+            foreach ($all as &$word) {
+                if (empty($word)) continue;
+                $words[] = $word . "." . $this->tld;
+            }
         }
 
         return $words;
