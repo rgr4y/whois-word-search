@@ -113,6 +113,15 @@ abstract class Nic
 
         $whois = $this->exec_timeout($cmd, self::TIMEOUT);
 
+        if (preg_match("/queries per hour exceeded/", $whois)) {
+            $this->sleep = 3600;
+
+            $whois = $this->rateLimit($domain);
+        }
+
+        // Rate limit so we don't get banned
+        sleep(mt_rand(1,3));
+
         return $whois;
     }
 
@@ -221,6 +230,41 @@ abstract class Nic
         return $buffer;
     }
 
-    abstract protected function isRegistered($whois);
+    /**
+     * Determine if domain is registered
+     *
+     * @param $whois
+     * @return bool
+     */
+    protected function isRegistered($whois)
+    {
+        $available = [
+            'do not have an entry',
+            'available for purchase',
+            'Created On',
+            'NOT FOUND',
+            'No entries found for domain',
+            'Domain not registered'
+        ];
+
+        $unavailable = [
+            'Status : Live',
+            'Domain reserved',
+            'STATUS:BANNED',
+            'Creation Date',
+            'Created On',
+        ];
+
+        $available = "/" . implode("|", $available) . "/";
+        $unavailable = "/" . implode("|", $unavailable) . "/";
+
+        if (preg_match($unavailable, $whois)) {
+            return true;
+        } elseif (preg_match($available, $whois)) {
+            return false;
+        } else {
+            throw new \Exception("Unknown WHOIS data\n" . $whois);
+        }
+    }
 }
 

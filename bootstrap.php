@@ -21,21 +21,3 @@ $capsule->setAsGlobal();
 
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
-
-/*
- * Main
- */
-if (!isset($argv[1])) {
-    echo "No TLD specified!\n";
-    exit;
-}
-
-$tld = $argv[1];
-$nicClass = "\Deft\Nic\\".ucfirst($tld);
-
-if (!class_exists($nicClass)) {
-	echo "Invalid TLD or implementation not created!\n";
-	exit;
-}
-
-$nic = new $nicClass($tld);

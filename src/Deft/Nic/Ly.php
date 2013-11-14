@@ -39,17 +39,6 @@ class Ly extends \Deft\Nic {
 	}
 
     /**
-     * Determine if domain is registered
-     *
-     * @param $whois
-     * @return bool
-     */
-    protected function isRegistered($whois)
-    {
-        return preg_match("/Domain not registered/", $whois) ? false : true;
-    }
-
-    /**
      * runWhois
      *
      * @param $domain

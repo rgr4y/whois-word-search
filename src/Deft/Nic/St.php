@@ -3,9 +3,9 @@
 namespace Deft\Nic;
 
 /**
- * .IO TLD
+ * .St TLD
  *
  * @package Deft\Nic
  * @author Rob Vella <me@robvella.com>
  */
-class Io extends \Deft\Nic { }
+class St extends \Deft\Nic { }
