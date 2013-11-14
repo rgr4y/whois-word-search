@@ -17,7 +17,7 @@ Usage
 
 Sample Output
 -------------
-'''
+```
 $ php crawl.php st
 Total: 4316
 khatti.sh IS AVAILABLE
@@ -51,3 +51,4 @@ ladyi.sh IS AVAILABLE
 laki.sh IS AVAILABLE
 lambi.sh IS AVAILABLE
 lami.sh IS AVAILABLE
+```
