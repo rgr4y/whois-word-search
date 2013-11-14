@@ -253,6 +253,7 @@ abstract class Nic
             'STATUS:BANNED',
             'Creation Date',
             'Created On',
+            'Client Updt\+Delt Lock'
         ];
 
         $available = "/" . implode("|", $available) . "/";
