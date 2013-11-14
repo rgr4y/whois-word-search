@@ -25,6 +25,7 @@ class Ch extends \Deft\Nic {
 
         $registered = $this->isRegistered($whois);
 
+        // Save to DB
         $this->save($domain, $registered, $whois);
 
         return $this->presenter($domain, $registered, $whois);
