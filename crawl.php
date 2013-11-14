@@ -29,10 +29,10 @@ foreach ($words as $word) {
 
         echo $word;
 
-	    if ($whois->registered === false) {
-    		echo " IS NOT REGISTERED\n";
+	    if ($whois->available === false) {
+    		echo " IS NOT AVAILABLE\n";
         } else {
-            echo " IS REGISTERED\n";
+            echo " IS AVAILABLE\n";
         }
     } else {
         echo "Skipping ".$word."\n";

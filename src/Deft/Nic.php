@@ -73,20 +73,20 @@ abstract class Nic
         }
     }
 
-    public function save($domain, $registered, $whois)
+    public function save($domain, $available, $whois)
     {
         $model = new Domain;
         $model->tld = $this->tld;
         $model->domain = $domain;
-        $model->registered = $registered;
+        $model->available = $available;
         $model->whois = $whois;
 
         $model->save();
     }
 
-    protected function presenter($domain, $registered, $whois)
+    protected function presenter($domain, $available, $whois)
     {
-        return (object)array('domain' => $domain, 'registered' => $registered, 'whois' => $whois);
+        return (object)array('domain' => $domain, 'available' => $available, 'whois' => $whois);
     }
 
     protected function rateLimit($domain)
@@ -133,12 +133,12 @@ abstract class Nic
             throw new \Exception('No whois data?');
         }
 
-        $registered = $this->isRegistered($whois);
+        $available = $this->isAvailable($whois);
 
         // Save to DB
-        $this->save($domain, $registered, $whois);
+        $this->save($domain, $available, $whois);
 
-        return $this->presenter($domain, $registered, $whois);
+        return $this->presenter($domain, $available, $whois);
     }
 
     protected function curlInit()
@@ -231,17 +231,16 @@ abstract class Nic
     }
 
     /**
-     * Determine if domain is registered
+     * Determine if domain is available
      *
      * @param $whois
      * @return bool
      */
-    protected function isRegistered($whois)
+    protected function isAvailable($whois)
     {
         $available = [
             'do not have an entry',
             'available for purchase',
-            'Created On',
             'NOT FOUND',
             'No entries found for domain',
             'Domain not registered'
@@ -260,9 +259,9 @@ abstract class Nic
         $unavailable = "/" . implode("|", $unavailable) . "/";
 
         if (preg_match($unavailable, $whois)) {
-            return true;
-        } elseif (preg_match($available, $whois)) {
             return false;
+        } elseif (preg_match($available, $whois)) {
+            return true;
         } else {
             throw new \Exception("Unknown WHOIS data\n" . $whois);
         }

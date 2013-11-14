@@ -23,12 +23,12 @@ class To extends \Deft\Nic {
 	}
 
     /**
-     * Determine if domain is registered
+     * Determine if domain is available
      *
      * @param $whois
      * @return bool
      */
-    protected function isRegistered($whois)
+    protected function isAvailable($whois)
     {
         if (preg_match("/So sorry, that one's taken|^Available$/", $whois)) {
             return false;
@@ -75,7 +75,7 @@ class To extends \Deft\Nic {
                 $this->rateLimit($domain);
             }
 
-            if ($this->isRegistered($whois)) {
+            if ($this->isAvailable($whois)) {
                 $whois = "Available";
             } else {
                 $whois = "Not available";

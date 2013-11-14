@@ -22,28 +22,6 @@ class Ch extends \Deft\Nic {
     const USE_CURL = true;
 
     /**
-     * Rate limit sleep second increment
-     */
-    const SLEEP_INC = 10;
-
-    /**
-     * How long to sleep when rate limited (incremented below)
-     * @var int
-     */
-    protected $sleep = 0;
-
-    /**
-     * Determine if domain registered
-     *
-     * @param $whois
-     * @return bool
-     */
-    protected function isRegistered($whois)
-    {
-        return preg_match("/do not have an entry/", $whois) ? false : true;
-    }
-
-    /**
      * @param $domain
      * @return mixed|string
      */

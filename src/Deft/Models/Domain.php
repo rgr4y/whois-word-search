@@ -7,6 +7,4 @@ namespace Deft\Models;
  *
  * @package Deft\Models
  */
-class Domain extends \Illuminate\Database\Eloquent\Model {
-
-}
+class Domain extends \Illuminate\Database\Eloquent\Model { }
