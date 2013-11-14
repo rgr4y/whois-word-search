@@ -1,9 +1,9 @@
 {
-    "name": "robvella/ly",
+    "name": "robvella/whois-word-search",
     "authors": [
         {
             "name": "Rob Vella",
-            "email": "robv@4over.com"
+            "email": "me@robvella.com"
         }
     ],
     "require": {
