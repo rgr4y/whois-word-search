@@ -3,9 +3,9 @@
 return array(
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'ly',
+    'database'  => 'whois_word_search',
     'username'  => 'root',
-    'password'  => 'qwe123',
+    'password'  => '',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
