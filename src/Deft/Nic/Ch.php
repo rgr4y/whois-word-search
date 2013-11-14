@@ -53,12 +53,7 @@ class Ch extends \Deft\Nic {
         $whois = strip_tags($whois);
 
         if (preg_match("/exceeded this limit/", $whois)) {
-            $this->sleep += self::SLEEP_INC;
-
-            echo "Sleeping ".$this->sleep." seconds due to rate limiting...\n";
-            sleep($this->sleep);
-
-            $whois = $this->runWhois($domain);
+            $whois = $this->rateLimit($domain);
         }
 
         // Reset sleep increment

@@ -5,7 +5,7 @@ return array(
     'host'      => 'localhost',
     'database'  => 'whois_word_search',
     'username'  => 'root',
-    'password'  => '',
+    'password'  => 'qwe123',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
