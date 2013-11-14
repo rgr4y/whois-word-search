@@ -1,0 +1,15 @@
+{
+    "name": "robvella/ly",
+    "authors": [
+        {
+            "name": "Rob Vella",
+            "email": "robv@4over.com"
+        }
+    ],
+    "require": {
+	"illuminate/database": "4.0.9"
+    },
+    "autoload": {
+        "psr-0": {"Deft\\": "src/"}
+    }
+}
