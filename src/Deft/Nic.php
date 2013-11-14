@@ -4,6 +4,12 @@ namespace Deft;
 
 use Deft\Models\Domain;
 
+/**
+ * TLD/Nic base class
+ *
+ * @package Deft
+ * @author Rob Vella <me@robvella.com>
+ */
 abstract class Nic 
 {
     const DEBUG = false;

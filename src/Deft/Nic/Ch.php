@@ -2,6 +2,12 @@
 
 namespace Deft\Nic;
 
+/**
+ * .CH TLD
+ *
+ * @package Deft\Nic
+ * @author Rob Vella <me@robvella.com>
+ */
 class Ch extends \Deft\Nic {
     const URL = "http://whois.europeregistry.com/whoisengine/request/whoisinfo.php?security_code=null&domain_name=";
     const USE_CURL = true;
@@ -18,6 +24,8 @@ class Ch extends \Deft\Nic {
         $whois = curl_exec($this->curl);
 
         $registered = $this->isRegistered($whois);
+
+        $this->save($domain, $registered, $whois);
 
         return $this->presenter($domain, $registered, $whois);
     }

@@ -2,6 +2,12 @@
 
 namespace Deft\Nic;
 
+/**
+ * .LY TLD
+ *
+ * @package Deft\Nic
+ * @author Rob Vella <me@robvella.com>
+ */
 class Ly extends \Deft\Nic {
 	public function __construct($tld)
 	{
