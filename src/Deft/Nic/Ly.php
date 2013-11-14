@@ -9,7 +9,12 @@ namespace Deft\Nic;
  * @author Rob Vella <me@robvella.com>
  */
 class Ly extends \Deft\Nic {
-	public function __construct($tld)
+    /**
+     * Class constructor
+     * 
+     * @param $tld
+     */
+    public function __construct($tld)
 	{
 		parent::__construct($tld);
 
@@ -18,7 +23,13 @@ class Ly extends \Deft\Nic {
         curl_setopt($this->curl, CURLOPT_URL, "http://nic.ly/whois.php");
 	}
 
-	protected function crawl($domain)
+    /**
+     * Run CURL crawl
+     *
+     * @param $domain
+     * @return mixed
+     */
+    protected function crawl($domain)
 	{
 		$domain = preg_replace("/\.ly$/","", $domain);
 		$post = array('Submit' => 'Search', 'domain' => $domain);
@@ -27,22 +38,31 @@ class Ly extends \Deft\Nic {
 		return curl_exec($this->curl);
 	}
 
+    /**
+     * Determine if domain is registered
+     *
+     * @param $whois
+     * @return bool
+     */
     protected function isRegistered($whois)
     {
         return trim($whois) === "Domain not registered." ? true : false;
     }
 
-	public function whois($domain)
+    /**
+     * runWhois
+     *
+     * @param $domain
+     * @return bool|string
+     */
+    public function runWhois($domain)
 	{
 		$html = $this->crawl($domain);
 
 		if (preg_match("/\<textarea.*\>(.*)\<\/textarea\>/s", $html, $matches)) {
 			$whois = $matches[1];
 
-            $registered = $this->isRegistered($whois);
-
-            $this->save($domain, $registered, $whois);
-            return $this->presenter($domain, $registered, $whois);
+            return $whois;
 		} else {
 			return false;
 		}

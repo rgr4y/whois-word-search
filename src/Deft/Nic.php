@@ -64,7 +64,7 @@ abstract class Nic
         return (object) array('domain' => $domain, 'registered' => $registered, 'whois' => $whois);
     }
 
-    public function whois($domain)
+    protected function runWhois($domain)
     {
         $cmd = 'whois';
 
@@ -74,11 +74,18 @@ abstract class Nic
 
         $whois = shell_exec($cmd . ' '.escapeshellarg($domain));
 
-        $registered = $this->isRegistered($whois);
-
         if (self::DEBUG) {
             echo $whois;
         }
+
+        return $whois;
+    }
+
+    public function whois($domain)
+    {
+        $whois = $this->runWhois($domain);
+
+        $registered = $this->isRegistered($whois);
 
         // Save to DB
         $this->save($domain, $registered, $whois);

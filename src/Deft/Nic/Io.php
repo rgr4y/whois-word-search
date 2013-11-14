@@ -10,6 +10,12 @@ namespace Deft\Nic;
  */
 class Io extends \Deft\Nic
 {
+    /**
+     * Determine if domain is registered
+     *
+     * @param $whois
+     * @return bool
+     */
     protected function isRegistered($whois)
     {
         return preg_match("/available for purchase/", $whois) ? false : true;
