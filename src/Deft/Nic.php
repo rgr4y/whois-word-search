@@ -52,6 +52,7 @@ abstract class Nic
     public function save($domain, $registered, $whois)
     {
         $model = new Domain;
+        $model->tld = $this->tld;
         $model->domain = $domain;
         $model->registered = $registered;
         $model->whois = $whois;
