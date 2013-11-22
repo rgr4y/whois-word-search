@@ -35,8 +35,8 @@ abstract class Nic
 
     public function getWords()
     {
-        $words = file_get_contents($this->wordsFile);
-        $words = explode("\n", $words);
+        $wordsStr = file_get_contents($this->wordsFile);
+        $words = explode("\n", $wordsStr);
 
         foreach ($words as $k => &$word) {
             if ($word === $this->tld) unset($words[$k]);
@@ -51,15 +51,20 @@ abstract class Nic
             }
         }
 
+        // Append words in "all" file
+        $allWords = array();
+
         if (file_exists($this->wordsDir."all")) {
             $all = file_get_contents($this->wordsDir."all");
             $all = explode("\n", $all);
 
             foreach ($all as &$word) {
                 if (empty($word)) continue;
-                $words[] = $word . "." . $this->tld;
+                $allWords[] = $word . "." . $this->tld;
             }
         }
+
+        $words = array_merge($allWords, $words);
 
         return $words;
     }
